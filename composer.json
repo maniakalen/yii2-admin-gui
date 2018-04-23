@@ -1,0 +1,29 @@
+{
+  "name": "maniakalen/admingui",
+  "description": "Admin GUI for modules and models",
+  "keywords": [
+    "PHP"
+  ],
+  "license": "Open Software License (OSL 3.0)",
+  "type": "library",
+  "authors": [
+    {
+      "name": "Petar Ivanov"
+    }
+  ],
+  "minimum-stability": "stable",
+  "require": {
+    "php": ">=5.4.0",
+    "yiisoft/yii2" : ">=2.0.12",
+    "maniakalen/callback": ">=1.0.0",
+    "maniakalen/widgets": "~1.1"
+  },
+  "autoload": {
+    "psr-0": {
+      "maniakalen\\": "src/"
+    }
+  },
+  "archive": {
+    "exclude": ["vendor", "build.xml"]
+  }
+}
