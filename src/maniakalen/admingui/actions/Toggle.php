@@ -19,6 +19,7 @@ class Toggle extends Action
 {
     /** @var ModelManager $manager */
     public $manager;
+    public $messages;
     /**
      * @throws \yii\base\InvalidConfigException
      */
@@ -36,9 +37,13 @@ class Toggle extends Action
     public function run($id)
     {
         if ($this->manager->toggleRecordStatus($id)) {
-            Yii::$app->session->addFlash('success', Yii::t('workflow', 'Record status toggled successfully'));
+            if (isset($this->messages['success'])) {
+                Yii::$app->session->addFlash('success', $this->messages['success']);
+            }
         } else {
-            Yii::$app->session->addFlash('danger', Yii::t('workflow', 'There was an issue toggling record status'));
+            if (isset($this->messages['danger'])) {
+                Yii::$app->session->addFlash('danger', $this->messages['danger']);
+            }
         }
         return $this->controller->redirect(Yii::$app->request->referrer);
     }

@@ -21,6 +21,7 @@ class Update extends Action
     /** @var ModelManager $manager */
     public $manager;
     public $redirect;
+    public $messages;
     /**
      * @throws \yii\base\InvalidConfigException
      */
@@ -39,9 +40,13 @@ class Update extends Action
     {
         $post = Yii::$app->request->post();
         if ($this->manager->updateRecord($id, $post)) {
-            Yii::$app->session->addFlash('success', Yii::t('workflow', 'Record updated successfully'));
+            if (isset($this->messages['success'])) {
+                Yii::$app->session->addFlash('success', $this->messages['success']);
+            }
         } else {
-            Yii::$app->session->addFlash('danger', Yii::t('workflow', 'There was an issue saving record'));
+            if (isset($this->messages['danger'])) {
+                Yii::$app->session->addFlash('danger', $this->messages['danger']);
+            }
         }
         return $this->controller->redirect(Url::to([$this->redirect, 'id' => $id]));
     }
