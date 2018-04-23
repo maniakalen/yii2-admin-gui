@@ -21,6 +21,7 @@ class Details extends Action
 {
     /** @var ModelManager $manager */
     public $manager;
+    public $view = 'details';
 
     /**
      * @throws \yii\base\InvalidConfigException
@@ -46,7 +47,7 @@ class Details extends Action
         }
         $record = ModelHelper::restore($record);
         return $this->controller->render(
-            'details',
+            $this->view,
             [
                 'title' => '',
                 'model' => $record

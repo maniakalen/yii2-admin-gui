@@ -19,6 +19,7 @@ class Grid extends Action
     /** @var ModelManager $manager */
     public $manager;
     public $createActionRoute;
+    public $view = 'grid';
     /**
      * @throws \yii\base\InvalidConfigException
      */
@@ -34,12 +35,15 @@ class Grid extends Action
      */
     public function run()
     {
-        return $this->controller->render('grid', [
-            'title' => '',
-            'provider' => $this->manager->getProvider(\Yii::$app->request->get()),
-            'model' => $this->manager->getSearchModel(),
-            'columns' => $this->manager->getGridColumns(),
-            'createAction' => $this->createActionRoute
-        ]);
+        return $this->controller->render(
+            $this->view,
+            [
+                'title' => '',
+                'provider' => $this->manager->getProvider(\Yii::$app->request->get()),
+                'model' => $this->manager->getSearchModel(),
+                'columns' => $this->manager->getGridColumns(),
+                'createAction' => $this->createActionRoute
+            ]
+        );
     }
 }
