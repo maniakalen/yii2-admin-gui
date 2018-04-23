@@ -19,7 +19,7 @@ class Grid extends Action
     /** @var ModelManager $manager */
     public $manager;
     public $createActionRoute;
-    public $view = 'grid';
+    public $view;
     /**
      * @throws \yii\base\InvalidConfigException
      */
@@ -27,6 +27,9 @@ class Grid extends Action
     {
         parent::init();
         $this->manager = Instance::ensure($this->manager, ModelManagerInterface::class);
+        if (!$this->view) {
+            $this->view = dirname(__DIR__) . '/views/grid';
+        }
     }
 
     /**

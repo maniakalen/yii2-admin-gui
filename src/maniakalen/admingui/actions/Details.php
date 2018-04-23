@@ -21,7 +21,7 @@ class Details extends Action
 {
     /** @var ModelManager $manager */
     public $manager;
-    public $view = 'details';
+    public $view;
 
     /**
      * @throws \yii\base\InvalidConfigException
@@ -30,6 +30,9 @@ class Details extends Action
     {
         parent::init();
         $this->manager = Instance::ensure($this->manager, ModelManagerInterface::class);
+        if (!$this->view) {
+            $this->view = dirname(__DIR__) . '/views/details';
+        }
     }
 
     /**
