@@ -27,8 +27,9 @@ class Grid extends Action
     {
         parent::init();
         $this->manager = Instance::ensure($this->manager, ModelManagerInterface::class);
+        \Yii::setAlias('@adminguiview', dirname(__DIR__) . '/views');
         if (!$this->view) {
-            $this->view = dirname(__DIR__) . '/views/grid';
+            $this->view = '@adminguiview/grid';
         }
     }
 
