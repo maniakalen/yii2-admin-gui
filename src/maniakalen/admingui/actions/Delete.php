@@ -45,6 +45,6 @@ class Delete extends Action
                 Yii::$app->session->addFlash('danger', $this->messages['danger']);
             }
         }
-        return $this->controller->goBack();
+        return $this->controller->redirect(Yii::$app->request->referrer);
     }
 }
