@@ -21,6 +21,7 @@ use yii\di\Instance;
 use yii\grid\SerialColumn;
 use yii\helpers\ArrayHelper;
 use Yii;
+use yii\web\NotFoundHttpException;
 
 class ModelManager extends Component implements ModelManagerInterface
 {
@@ -116,10 +117,19 @@ class ModelManager extends Component implements ModelManagerInterface
         }
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     * @throws NotFoundHttpException
+     */
     public function deleteRecord($id)
     {
         $model = $this->model;
-        return $model::deleteAll(['id' => $id]);
+        $model = $model::findOne($id);
+        if (!$model) {
+            throw new NotFoundHttpException("Model with this id not found");
+        }
+        return $model->delete();
     }
 
     /**
