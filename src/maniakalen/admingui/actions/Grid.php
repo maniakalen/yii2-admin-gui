@@ -13,6 +13,7 @@ use maniakalen\admingui\components\ModelManager;
 use maniakalen\admingui\interfaces\ModelManagerInterface;
 use yii\base\Action;
 use yii\di\Instance;
+use yii\helpers\ArrayHelper;
 
 class Grid extends Action
 {
@@ -20,6 +21,9 @@ class Grid extends Action
     public $manager;
     public $createActionRoute;
     public $view;
+
+    public $title;
+    public $params;
     /**
      * @throws \yii\base\InvalidConfigException
      */
@@ -39,10 +43,13 @@ class Grid extends Action
      */
     public function run()
     {
+        if (!empty($this->params)) {
+            \Yii::$app->params = ArrayHelper::merge(\Yii::$app->params, $this->params);
+        }
         return $this->controller->render(
             $this->view,
             [
-                'title' => '',
+                'title' => $this->title?:'',
                 'provider' => $this->manager->getProvider(\Yii::$app->request->get()),
                 'model' => $this->manager->getSearchModel(),
                 'columns' => $this->manager->getGridColumns(),

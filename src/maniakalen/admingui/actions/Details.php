@@ -15,6 +15,7 @@ use maniakalen\admingui\interfaces\ModelManagerInterface;
 use yii\base\Action;
 use yii\base\Model;
 use yii\di\Instance;
+use yii\helpers\ArrayHelper;
 use yii\web\NotFoundHttpException;
 
 class Details extends Action
@@ -23,6 +24,8 @@ class Details extends Action
     public $manager;
     public $view;
 
+    public $title;
+    public $params;
     /**
      * @throws \yii\base\InvalidConfigException
      */
@@ -44,6 +47,9 @@ class Details extends Action
      */
     public function run($id = null)
     {
+        if (!empty($this->params)) {
+            \Yii::$app->params = ArrayHelper::merge(\Yii::$app->params, $this->params);
+        }
         /** @var Model $record */
         $record = $id?$this->manager->getRecord($id):$this->manager->getObjectInstance();
         if (!$record) {
@@ -53,7 +59,7 @@ class Details extends Action
         return $this->controller->render(
             $this->view,
             [
-                'title' => '',
+                'title' => $this->title?:'',
                 'model' => $record
             ]
         );
