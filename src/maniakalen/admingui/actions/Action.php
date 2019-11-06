@@ -19,7 +19,7 @@ class Action extends \yii\base\Action
      */
     protected function beforeRun()
     {
-        $event = \Yii::createObject(['class' => ActionEvent::class]);
+        $event = \Yii::createObject(['class' => ActionEvent::class], ['action' => $this]);
         $this->trigger(static::EVENT_BEFORE_RUN, $event);
         return $event->isValid;
     }
@@ -30,7 +30,7 @@ class Action extends \yii\base\Action
      */
     protected function afterRun()
     {
-        $event = \Yii::createObject(['class' => ActionEvent::class]);
+        $event = \Yii::createObject(['class' => ActionEvent::class], ['action' => $this]);
         $this->trigger(static::EVENT_AFTER_RUN, $event);
     }
 }
