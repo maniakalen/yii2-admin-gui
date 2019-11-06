@@ -11,7 +11,6 @@ namespace maniakalen\admingui\actions;
 
 use maniakalen\admingui\components\ModelManager;
 use maniakalen\admingui\interfaces\ModelManagerInterface;
-use yii\base\Action;
 use yii\di\Instance;
 use yii\helpers\Url;
 use Yii;

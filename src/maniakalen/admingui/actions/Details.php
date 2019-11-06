@@ -12,7 +12,6 @@ namespace maniakalen\admingui\actions;
 use maniakalen\admingui\components\ModelManager;
 use maniakalen\admingui\helpers\ModelHelper;
 use maniakalen\admingui\interfaces\ModelManagerInterface;
-use yii\base\Action;
 use yii\base\Model;
 use yii\di\Instance;
 use yii\helpers\ArrayHelper;
